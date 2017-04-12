@@ -1,11 +1,57 @@
+<link rel="import" href="../../components/drawer/progress/progress.html" />
 
+<dom-module id="pd-drawer">
+  <link rel="stylesheet" href="../../components/drawer/drawer.css" />
+  <style>
+    progress{
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+    }
+  </style>
 
-<dom-module id="drawer">
   <template>
-    <div id="drawer" class$={{ mainClasses }}">
+    <context id="context"></context>
+    <div id="drawer" class$="{{mainClasses}}">
+      <div class="c-p paper-toolbar p-l-05 p-r-05 shadow-bottom">
+        <div class="scrim" on-click="closeDrawers"></div>
+        <paper-icon-button class="left-show-btn f-left" icon="menu" title="menu" on-click="toggleLeft"></paper-icon-button>
+        <div class="pd-toolbar-header p-l-05 f-left"><content select=".logo"></content></div>
+        <paper-icon-button class="right-show-btn f-right" icon="more-vert" title="more-vert" on-click="toggleRight"></paper-icon-button>
+        <search class="m-t-0-2 f-right"></search>
+        <progress></progress>
+      </div>
+
+      <div class="main c-n-dark">
+        <div class="main-section">
+          <drawer-main id="drawerMain" ></drawer-main>
+        </div>
+        <div class="scrim" on-click="closeDrawers"></div>
+        <div class="left-drawer c-n-light shadow-right">
+          <div class="drawer-inner">
+            <div class="drawer-inner-width">
+              <content select=".left-menu"></content>
+              <paper-icon-button class="pin-btn c-text-light" icon="turned-in" title="turned-in" on-click="pinLeft"></paper-icon-button>
+            </div>
+          </div>
+        </div>
+
+        <div class="right-drawer c-n-light shadow-left">
+          <div class="drawer-inner">
+            <div class="drawer-inner-width">
+              <content select=".right-menu"></content>
+              <paper-icon-button class="pin-btn c-text-light" icon="turned-in" title="turned-in" on-click="pinRight"></paper-icon-button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
   </template>
 </dom-module>
+
 
 <script>
   Polymer({
