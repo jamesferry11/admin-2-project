@@ -1,0 +1,28 @@
+<dom-module id="drawer">
+  <template>
+    <p>LeftShow:<input type="text" value="{{leftShow::input}}"></p>
+    <p>RightShow:<input type="text" value="{{leftShow::input}}"></p>
+    <p>leftShow value is <span>{{ leftShow }}</span></p>
+    <p>rightShow value is <span>{{ rightShow }}</span></p>
+
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: "drawer",
+    properties: {
+      leftShow: {
+        type: Boolean,
+        value: true,
+        notify:true
+      },
+      rightShow: {
+        type: Boolean,
+        value: true,
+        notify:true
+      }
+    }
+  });
+
+</script>
