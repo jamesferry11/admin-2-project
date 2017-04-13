@@ -1,11 +1,38 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../components/drawer/drawer.html">
+<link rel="import" href="../../../bower_components/paper-toolbar/paper-toolbar.html" />
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html" />
+<link rel="import" href="../../../bower_components/iron-icons/iron-icons.html"/>
+<link rel="import" href="../../../bower_components/iron-icon/iron-icon.html" />
+<link rel="import" href="../../../bower_components/iron-ajax/iron-ajax.html" />
+<link rel="import" href="../../../bower_components/iron-icons/image-icons.html" />
+<link rel="import" href="../../../bower_components/iron-a11y-keys/iron-a11y-keys.html" />
+<link rel="import" href="../../../bower_components/iron-icons/hardware-icons.html" />
 
-<dom-module id="dashboard">
+<link rel="import" href="../../components/search/search.html" />
+<link rel="import" href="../../components/drawer/drawer-menu/drawer-menu.html" />
+<link rel="import" href="../../components/drawer/drawer.html" />
+<link rel="import" href="../../components/list/list-item.html"/>
+<link rel="import" href="../../components/list/list-menu.html" />
+<link rel="import" href="../../components/data/data.html" />
+<link rel="import" href="../../components/repo/context.html" />
+<link rel="import" href="../../components/ui/ui-toggle/ui-toggle.html" />
+<link rel="import" href="../../components/drawer/drawer-main/drawer-main.html" />
+<link rel="import" href="../../components/flatiron-director/flatiron-director.html" />
+<link rel="import" href="../../components/dashboard/style.html"/>
+<link rel="import" href="../../components/drawer/drawer-friends/drawer-friends.html" />
+<link rel="import" href="../../components/card/card.html" />
+<link rel="import" href="../../components/ui/ui-grid/ui-grid.html" />
+
+<link rel="import" href="../../../bower_components/paper-ripple/paper-ripple.html" />
+<link rel="import" href="../../components/animation/animation-dropdown.html"/>
+
+<script src="../../components/dashboard/global.js"></script>
+
+<dom-module id="pd-dashboard">
   <link rel="stylesheet" href="../../../app/css/main.css" />
   <link rel="stylesheet" href="../../../app/css/position.css" />
   <link rel="stylesheet" href="../../../app/css/font.css" />
-
+  <link rel="import" type="css" href="../../components/dashboard/style-button.html"/>
   <style>
     paper-input{
       color:var(--color-neutral);
@@ -13,16 +40,27 @@
   </style>
 
   <template>
-    <drawer>
-
-
-
+    <drawer class$="{{drawerClasses}}">
+      <div class="logo">
+        <a href="/#!/">
+          <img src="../../images/LogoSymbol.png" /><img class="p-l-0-5" src="../../images/LogoText.png" />
+        </a>
+      </div>
+      <div class="left-menu">
+        <drawer-menu></drawer-menu>
+      </div>
+      <div class="right-menu">
+        <drawer-friends></drawer-friends>
+      </div>
     </drawer>
+    <flatiron-director></flatiron-director>
   </template>
 </dom-module>
 
 <script>
   Polymer({
-    is: "dashboard"
+    is: "dashboard",
+    ready:() => {
+    }
   });
 </script>

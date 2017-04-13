@@ -1,0 +1,62 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html" />
+<link rel="import" href="../../components/repo/context.html" />
+<script src="director/director.min.js"></script>
+
+<dom-module id="flatiron-director">
+  <template>
+    <context id="context"></context>
+  </template>
+</dom-module>
+
+<script>
+  (() => {
+    var private_router;
+    Polymer({
+      is: "flatiron-director",
+      properties: {
+        autoHash: {
+          type: Boolean,
+          value: false,
+          reflectToAttribute: true
+        },
+        route: {
+          type: String,
+          value: "",
+          notify: true,
+          reflectToAttribute:true,
+          observer: 'routeChanged'
+        }
+      },
+      ready: () => {
+        const self = this;
+        self.router.on(/(.*)/, function (route) {
+          self.route = route;
+        }.bind(self));
+
+        self.route = self.router.getRoute() ?
+          self.router.getRoute().join(self.router.delimiter) : '';
+
+        if(self.route == "")
+          window.location.hash = '!/';
+      },
+      routeChanged: (newValue, oldValue) => {
+        if (newValue == null || newValue == "")
+          return;
+
+        if (this.autoHash) {
+          window.location.hash = this.route;
+        }
+        this.$.context.getData().update("route", this.route);
+      },
+
+      get router() {
+        if (!private_router) {
+          private_router = new Router();
+          private_router.init();
+        }
+        return private_router;
+      }
+    });
+  })
+  ();
+</script>
