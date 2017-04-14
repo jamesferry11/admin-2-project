@@ -1,11 +1,11 @@
 'use strict';
-const gulp        = require('gulp');
-const filters     = require('gulp-filter');
-const insert      = require('gulp-insert');
-const sass        = require('gulp-sass');
-const merge       = require('merge-stream');
-const vulcanize   = require('gulp-vulcanize');
-const $           = require('gulp-load-plugins')();
+const gulp = require('gulp');
+const filters = require('gulp-filter');
+const insert = require('gulp-insert');
+const sass = require('gulp-sass');
+const merge = require('merge-stream');
+const vulcanize = require('gulp-vulcanize');
+const $ = require('gulp-load-plugins')();
 const runSequence = require('run-sequence');
 
 const filter = filters(['*', '!app/css/skins/color-vars-template.scss', '!app/css/skins/skin-template.scss']);
@@ -33,15 +33,15 @@ gulp.task('copy', () => {
     'bower_components/**/*'
   ]).pipe(gulp.dest('app/bower_components'));
 
-  const vulcanized = gulp.src(['app/components/pd-dashboard/pd-dashboard.html'])
-    .pipe($.rename('pd-dashboard.vulcanized.html'))
-    .pipe(gulp.dest('app/components/pd-dashboard'));
+  const vulcanized = gulp.src(['app/components/dashboard/dashboard.html'])
+    .pipe($.rename('dashboard.vulcanized.html'))
+    .pipe(gulp.dest('app/components/dashboard'));
 
   return merge(bower);
 });
 
 gulp.task('vulcanize', () => {
-  return gulp.src('../app/components/pd-dashboard/pd-dashboard.vulcanized.html')
+  return gulp.src('../app/components/dashboard/dashboard.vulcanized.html')
     .pipe(vulcanize({
       abspath: '',
       excludes: ['../bower_components/polymer/polymer.html',
@@ -49,11 +49,10 @@ gulp.task('vulcanize', () => {
       ],
       stripExcludes: false
     }))
-    .pipe(gulp.dest('../app/components/pd-dashboard'));
+    .pipe(gulp.dest('../app/components/dashboard'));
 });
 
 gulp.task('precache', (callback) => {
-
 });
 
 gulp.task('default', (cb) =>  {

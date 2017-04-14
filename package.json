@@ -3,13 +3,24 @@
   "name": "PolymerProject",
   "private": true,
   "devDependencies": {
+    "cookie-parser": "^1.4.3",
+    "express-session": "^1.15.2",
     "express": "^4.15.2",
+    "grunt-file-append": "^0.0.7",
     "gulp": "~3.9.1",
     "gulp-sass": "^3.1.0",
+    "gulp-filter": "^5.0.0",
+    "gulp-vulcanize": "^6.1.0",
     "gulp-insert": "~0.5.0",
     "gulp-load-plugins": "^1.5.0",
     "gulp-rename": "^1.2.2",
-    "run-sequence": "^1.2.2"
+    "run-sequence": "^1.2.2",
+    "merge-stream": "^1.0.1",
+    "json-server": "^0.9.6",
+    "socket.io": "^1.7.3",
+    "vulcanize": "^1.15.4",
+    "web-component-tester": "^5.0.1"
+
   },
   "dependencies": {}
 }

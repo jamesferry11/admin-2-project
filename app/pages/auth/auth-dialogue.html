@@ -1,0 +1,76 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../components/data/data.html" />
+<link rel="import" href="../../../bower_components/paper-input/paper-input.html"/>
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html" />
+<link rel="import" href="../../../bower_components/paper-checkbox/paper-checkbox.html" />
+<link rel="import" href="../../../bower_components/iron-a11y-keys/iron-a11y-keys.html" />
+<link rel="import" href="../../components/page-dialogue/page-dialogue.html">
+<link rel="import" href="../../components/card/card.html" />
+<link rel="import" href="../../components/repo/repo-auth.html" />
+<link rel="import" href="../../../bower_components/paper-toast/paper-toast.html" />
+<link rel="import" href="../../components/repo/context.html" />
+
+<dom-module id="auth-dialog">
+  <link rel="stylesheet" href="../../css/main.css" />
+  <link rel="stylesheet" href="../../css/position.css" />
+  <link rel="stylesheet" href="../../css/skins/default/colors.css" />
+  <link rel="stylesheet" href="../../pages/auth/auth.css" />
+
+  <template>
+    <context service="http://localhost:5000/"></context>
+    <iron-a11y-keys target="{{dialogue}}" keys="enter" on-keys-pressed="login"></iron-a11y-keys>
+    <repo-auth id="repo"></repo-auth>
+    <page-dialogue id="dialogue">
+      <div head class="t-center">
+        <img style="height:4em" src="../../images/LogoSymbolInverse.png" />
+        <img style="height:4em" src="../../images/LogoTextInverse.png" />
+      </div>
+
+      <div body class="p-t-2">
+        <paper-input id="username" no-label-float label="Username" value="{{user.username}}" autofocus></paper-input>
+        <paper-input no-label-float label="Password" type="password" value="{{user.password}}"></paper-input>
+        <paper-checkbox class="f-left remember-me" on-click=""></paper-checkbox>
+        <div class="f-left p-l-0-5 remember-me-txt">This is James Test</div>
+        <paper-button on-click="login" tabindex="0" class="c-p f-right login-btn">Login</paper-button>
+      </div>
+    </page-dialogue>
+    <paper-toast id="toast" text=""></paper-toast>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: "auth-dialogue",
+    properties: {
+      user:{
+        type: Object,
+        value: {
+          username: "",
+          password: ""
+        },
+        notify:true
+      }
+    },
+
+    ready: () => {
+      this.$.username.$.input.focus();
+    },
+
+    login: () => {
+      this.$.repo.login(this.user, this.loginCallback, this);
+    },
+
+    loginCallback:(response, self) => {
+      if(response.success){
+        window.location.href = "/";
+      } else {
+        self.$.toast.text = response.error;
+        self.$.toast.hide();
+        self.async (() => {
+          self.$.toast.show();
+        },100);
+      }
+    }
+  });
+
+</script>
